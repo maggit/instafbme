@@ -4,15 +4,15 @@ require 'nokogiri'
 require 'i18n'
 require 'json'
 require 'instagram'
+require 'redis'
 
 @@config = YAML.load_file("lib/config.yml") rescue nil || {}
 
 configure do
-  require 'redis'
   redisUri = ENV["REDISTOGO_URL"] || @@config['REDISTOGO_URL']
   uri = URI.parse(redisUri) 
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-  require File.join(File.dirname(__FILE__), 'lib/instafb')
+  #require File.join(File.dirname(__FILE__), 'lib/instafb')
   set :sessions, true #temporary
 end
 
@@ -35,7 +35,7 @@ end
 
 get_or_post '/' do
   @context = "index"
-  redirect '/dashboard' if @user
+  redirect '/feed' if @user
   unless REDIS.get("main_title")
     REDIS.set("main_title", "Comming soon!")
   end
