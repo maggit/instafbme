@@ -14,7 +14,6 @@ configure do
   uri = URI.parse(redisUri) 
   #REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   #require File.join(File.dirname(__FILE__), 'lib/instafb')
-  set :sessions, true #temporary
 end
 
 Instagram.configure do |config|
@@ -23,7 +22,6 @@ Instagram.configure do |config|
 end
 
 before do
-  next if request.path_info =~ /ping$/
   @user = session[:user] if session[:user]
   @access_token = session[:access_token] if session[:access_token]
 end
