@@ -3,13 +3,13 @@ require 'sinatra'
 require 'nokogiri'
 require 'i18n'
 require 'json'
-#require 'instagram'
+require 'instagram'
 
 
 @@config = YAML.load_file("lib/config.yml") rescue nil || {}
 
 configure do
-  require 'redis'
+  #require 'redis'
   #redisUri = ENV["REDISTOGO_URL"] || @@config['REDISTOGO_URL']
   #uri = URI.parse(redisUri) 
   #REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
