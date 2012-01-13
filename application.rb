@@ -6,9 +6,8 @@ require 'json'
 require 'instagram'
 
 
-@@config = YAML.load_file("lib/config.yml") rescue nil || {}
-
 configure do
+  @@config = YAML.load_file("lib/config.yml") rescue nil || {}
   #require 'redis'
   #redisUri = ENV["REDISTOGO_URL"] || @@config['REDISTOGO_URL']
   #uri = URI.parse(redisUri) 
@@ -16,10 +15,10 @@ configure do
   #require File.join(File.dirname(__FILE__), 'lib/instafb')
 end
 
-#Instagram.configure do |config|
-#  config.client_id = @@config['INSTAGRAM_CLIENT_ID']
-#  config.client_secret = @@config['INSTAGRAM_CLIENT_SECRET']
-#end
+Instagram.configure do |config|
+ config.client_id = @@config['INSTAGRAM_CLIENT_ID']
+ config.client_secret = @@config['INSTAGRAM_CLIENT_SECRET']
+end
 
 before do
   #@user = session[:user] if session[:user]
