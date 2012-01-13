@@ -24,8 +24,8 @@ end
 
 before do
   next if request.path_info =~ /ping$/
-  @user = session[:user]
-  @access_token = session[:access_token]
+  @user = session[:user] if session[:user]
+  @access_token = session[:access_token] if session[:access_token]
 end
 
 
