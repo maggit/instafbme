@@ -36,12 +36,20 @@ end
 get_or_post '/' do
   @context = "index"
   redirect '/feed' if @user
+  
   unless REDIS.get("main_title")
     REDIS.set("main_title", "Comming soon!")
   end
+  
   @test = REDIS.get("main_title")
   erb :index
 end
+
+get_or_post '/about' do
+  @context = "about"
+  erb :about
+end
+
 
 get "/oauth/connect" do
   redirect Instagram.authorize_url(:redirect_uri => @@config['INSTAGRAM_CALLBACK_URL'])
