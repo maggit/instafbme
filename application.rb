@@ -12,7 +12,7 @@ configure do
   require 'redis'
   redisUri = ENV["REDISTOGO_URL"] || @@config['REDISTOGO_URL']
   uri = URI.parse(redisUri) 
-  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+  #REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   #require File.join(File.dirname(__FILE__), 'lib/instafb')
   set :sessions, true #temporary
 end
@@ -38,11 +38,11 @@ get_or_post '/' do
   @context = "index"
   redirect '/feed' if @user
   
-  unless REDIS.get("main_title")
-    REDIS.set("main_title", "Comming soon!")
-  end
+  #unless REDIS.get("main_title")
+    #REDIS.set("main_title", "Comming soon!")
+    #end
   
-  @test = REDIS.get("main_title")
+  #@test = REDIS.get("main_title")
   erb :index
 end
 
