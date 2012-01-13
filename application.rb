@@ -3,6 +3,7 @@ require 'sinatra'
 require 'nokogiri'
 require 'i18n'
 require 'json'
+require 'faraday'
 require 'instagram'
 
 
