@@ -75,7 +75,6 @@ get "/feed" do
 
     for media_item in client.user_recent_media(:count => 60)
       html << "<a href='#{media_item.images.standard_resolution.url}'><img src='#{media_item.images.thumbnail.url}'></a>"
-      count += 1
     end
 
   html
