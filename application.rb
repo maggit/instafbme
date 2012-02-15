@@ -69,7 +69,7 @@ get "/feed" do
 
   html = "<h1>#{user.username}'s recent photos</h1>"
   logger.info "user recent media #{client.user_recent_media.inspect}"
-  for media_item in client.user_recent_media
+  for media_item in client.user_recent_media(:count => 220)
     html << "<a href='#{media_item.images.standard_resolution.url}'><img src='#{media_item.images.thumbnail.url}'></a>"
   end
   html
