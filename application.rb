@@ -62,15 +62,15 @@ get "/oauth/callback" do
 end
 
 get "/feed" do
-  logger.info "received event = #{@access_token}"
+  logger.info "@access_token = #{@access_token}"
   client = Instagram.client(:access_token => session[:access_token])
   user = client.user
   session[:user] = user
-  logger.info "received event = #{user}"
+  logger.info "received user = #{user}"
 
   html = "<h1>#{user.username}'s recent photos</h1>"
   for media_item in client.user_recent_media
-    html << "<img src='#{media_item.images.thumbnail.url}'>"
+    html << "<a href='#{media_item.images.standard_resolution.url}'><img src='#{media_item.images.thumbnail.url}'></a>"
   end
   html
 end
