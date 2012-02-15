@@ -18,7 +18,11 @@ GEM
     json (1.6.5)
     multi_json (0.0.5)
     multipart-post (1.1.5)
+    nest (1.1.0)
+      redis (~> 2.1)
     nokogiri (1.5.0)
+    ohm (0.1.3)
+      nest (~> 1.0)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -39,5 +43,6 @@ DEPENDENCIES
   json
   multi_json (~> 0.0.5)
   nokogiri
+  ohm
   redis
   sinatra

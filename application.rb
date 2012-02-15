@@ -5,14 +5,14 @@ require 'i18n'
 require 'json'
 require 'instagram'
 
-
 configure do
   @@config = YAML.load_file("lib/config.yml") rescue nil || {}
   require 'redis'
   redisUri = ENV["REDISTOGO_URL"] || @@config['REDISTOGO_URL']
   uri = URI.parse(redisUri) 
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
-  #require File.join(File.dirname(__FILE__), 'lib/instafb')
+  #require File.join(File.dirname(__FILE__), 'lib/models/user')
+ 
 end
 
 Instagram.configure do |config|
@@ -23,6 +23,7 @@ end
 before do
   @user = session[:user] if session[:user]
   @access_token = session[:access_token] if session[:access_token]
+  puts @access_token
 end
 
 
@@ -64,6 +65,8 @@ get "/feed" do
   client = Instagram.client(:access_token => @access_token)
   user = client.user
   session[:user] = user
+  event_data = JSON.parse user
+  logger.info "received event = #{event_data}"
 
   html = "<h1>#{user.username}'s recent photos</h1>"
   for media_item in client.user_recent_media
@@ -71,3 +74,9 @@ get "/feed" do
   end
   html
 end
+
+get "/logout" do
+  session[:user] = nil
+  session[:access_token] = nil
+  redirect "/"
+end 
