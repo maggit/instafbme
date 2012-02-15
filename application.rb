@@ -3,16 +3,15 @@ require 'sinatra'
 require 'nokogiri'
 require 'i18n'
 require 'json'
-require 'faraday'
 require 'instagram'
 
 
 configure do
   @@config = YAML.load_file("lib/config.yml") rescue nil || {}
-  #require 'redis'
-  #redisUri = ENV["REDISTOGO_URL"] || @@config['REDISTOGO_URL']
-  #uri = URI.parse(redisUri) 
-  #REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+  require 'redis'
+  redisUri = ENV["REDISTOGO_URL"] || @@config['REDISTOGO_URL']
+  uri = URI.parse(redisUri) 
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   #require File.join(File.dirname(__FILE__), 'lib/instafb')
 end
 
@@ -22,8 +21,8 @@ Instagram.configure do |config|
 end
 
 before do
-  #@user = session[:user] if session[:user]
-  #@access_token = session[:access_token] if session[:access_token]
+  @user = session[:user] if session[:user]
+  @access_token = session[:access_token] if session[:access_token]
 end
 
 
@@ -37,11 +36,11 @@ get_or_post '/' do
   @user =  session[:user]
   redirect '/feed' if @user
   
-  #unless REDIS.get("main_title")
-    #REDIS.set("main_title", "Comming soon!")
-    #end
+  unless REDIS.get("main_title")
+    REDIS.set("main_title", "Comming soon!")
+  end
   
-  #@test = REDIS.get("main_title")
+  @test = REDIS.get("main_title")
   erb :index
 end
 
