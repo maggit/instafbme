@@ -70,17 +70,14 @@ get "/feed" do
   logger.info "user recent media #{client.user_recent_media.inspect}"
   
   html = "<h1>#{user.username}'s recent photos</h1>"
-  count = 0
-  while count < (session[:counts] - 120) do
-    last = count == 0 ? client.user_recent_media(:count => 60).last : (session[:last] ? client.user_recent_media(:count => 60, :max_id => session[:last].id).last : nil)
-    session[:last] = last
-    if last and session[:last]
-    for media_item in client.user_recent_media(:count => 60, :max_id => last.id)
+
+
+
+    for media_item in client.user_recent_media(:count => 60)
       html << "<a href='#{media_item.images.standard_resolution.url}'><img src='#{media_item.images.thumbnail.url}'></a>"
       count += 1
     end
-    end
-  end
+
   html
 end
 
