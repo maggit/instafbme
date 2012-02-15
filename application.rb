@@ -71,7 +71,7 @@ get "/feed" do
   
   html = "<h1>#{user.username}'s recent photos</h1>"
   count = 0
-  while count < session[:counts] do
+  while count < (session[:counts] - 120) do
     last = count == 0 ? client.user_recent_media(:count => 60).last : (session[:last] ? client.user_recent_media(:count => 60, :max_id => session[:last].id).last : nil)
     session[:last] = last
     if last and session[:last]
