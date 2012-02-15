@@ -65,8 +65,7 @@ get "/feed" do
   client = Instagram.client(:access_token => @access_token)
   user = client.user
   session[:user] = user
-  event_data = JSON.parse user
-  logger.info "received event = #{event_data}"
+  logger.info "received event = #{user}"
 
   html = "<h1>#{user.username}'s recent photos</h1>"
   for media_item in client.user_recent_media
