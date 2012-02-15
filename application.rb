@@ -71,13 +71,13 @@ get "/feed" do
   
   html = "<h1>#{user.username}'s recent photos</h1>"
   count = 0
-  while count < session[:counts]
+  while count < session[:counts] do
     last = count == 0 ? client.user_recent_media(:count => 60).last : client.user_recent_media(:count => 60, :max_id => last.id).last
     for media_item in client.user_recent_media(:count => 60, :max_id => last.id)
       html << "<a href='#{media_item.images.standard_resolution.url}'><img src='#{media_item.images.thumbnail.url}'></a>"
       count += 1
     end
-  do
+  end
   html
 end
 
