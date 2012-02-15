@@ -62,7 +62,8 @@ get "/oauth/callback" do
 end
 
 get "/feed" do
-  client = Instagram.client(:access_token => @access_token)
+  logger.info "received event = #{@access_token}"
+  client = Instagram.client(:access_token => session[:access_token])
   user = client.user
   session[:user] = user
   logger.info "received event = #{user}"
