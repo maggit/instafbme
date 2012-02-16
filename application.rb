@@ -12,7 +12,6 @@ configure do
   uri = URI.parse(redisUri) 
   REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
   #require File.join(File.dirname(__FILE__), 'lib/models/user')
- 
 end
 
 Instagram.configure do |config|
@@ -25,7 +24,6 @@ before do
   @access_token = session[:access_token] if session[:access_token]
 end
 
-
 def get_or_post(path, opts={}, &block)
   get(path, opts, &block)
   post(path, opts, &block)
@@ -35,15 +33,7 @@ get_or_post '/' do
   @context = "index"
   @user =  session[:user]
   redirect '/feed' if @user
-  
-  unless REDIS.get("main_title")
-    REDIS.set("main_title", "Comming soon!")
-  end
-  
-  @test = REDIS.get("main_title")
-  
   @error = params[:error] if params[:error]
-  
   erb :index
 end
 
@@ -51,7 +41,6 @@ get_or_post '/about' do
   @context = "about"
   erb :about
 end
-
 
 get "/oauth/connect" do
   redirect Instagram.authorize_url(:redirect_uri => @@config['INSTAGRAM_CALLBACK_URL'])
