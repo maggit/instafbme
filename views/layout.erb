@@ -81,8 +81,14 @@
             <ul class="nav">
               <li class="<% if @context == 'index' or @context == 'dashboard'%>active<% end %>"><a href="/">Home</a></li>
               <li class="<% if @context == 'about'%>active<% end %>"><a href="/about">About</a></li>
-			  <% if @user %><li><a href='/logout'>Logout</a></li><% end %>
             </ul>
+			 <% if @user %>
+				<ul class="nav pull-right">
+					<li><a href=''>Settings</li>
+					<li class="divider-vertical"></li>
+					<li><a href='/logout'>Logout</a></li>
+				</ul>
+			<% end %>
           </div>
         </div>
       </div>
