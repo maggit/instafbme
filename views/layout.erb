@@ -74,26 +74,30 @@
     </style>
 	</head>
 	<body>
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container" style="width: auto;">
-					<a class="brand" href="/">instafb.me</a>
-					<div class="nav-collapse">
-						<ul class="nav">
-							<li class="<% if @context == 'index' or @context == 'dashboard'%>active<% end %>"><a href="/">Home</a></li>
-							<li class="<% if @context == 'about'%>active<% end %>"><a href="/about">About</a></li>
-						</ul>
-						<% if @user %>
-						<ul class="nav pull-right">
-							<li><a href=''>Settings</li>
-								<li class="divider-vertical"></li>
-								<li><a href='/logout'>Logout</a></li>
-						</ul>
-						<% end %>
+		<div class="topbar">
+			<div class="fill">
+				<div class="navbar navbar-fixed-top">
+					<div class="navbar-inner">
+						<div class="container">
+							<a class="brand" href="/">instafb.me</a>
+							<div class="nav-collapse">
+								<ul class="nav">
+									<li class="<% if @context == 'index' or @context == 'dashboard'%>active<% end %>"><a href="/">Home</a></li>
+									<li class="<% if @context == 'about'%>active<% end %>"><a href="/about">About</a></li>
+								</ul>
+								<% if @user %>
+								<ul class="nav pull-right">
+									<li><a href=''>Settings</li>
+										<li class="divider-vertical"></li>
+										<li><a href='/logout'>Logout</a></li>
+									</ul>
+									<% end %>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-	  </div>
       <div class="container">
         <div class="content">
 			<div class="page-header">
