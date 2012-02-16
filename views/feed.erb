@@ -1,0 +1,19 @@
+<div class="row">
+	<div class="span10">
+		<h1><%=@user.username%>'s recent photos</h1>
+		<ul class="media-grid">
+			<% @recent_media.each |media | do %>
+			 	<li class="span3">
+					<a href="<%=media.images.standard_resolution.url%>"><img  class="thumbnail" src="<%=media.images.thumbnail.url%>"></a>
+				</li>
+			<% end %>
+		</ul>
+		<pre class="prettyprint"></pre>
+	</div>
+	<div class="span4">
+		<div id="connect_button">
+			<a href="/logout">Logout</a>
+			<img class="thumbnail" src="/images/insta_logo.jpg">
+		</div>
+	</div>
+</div>

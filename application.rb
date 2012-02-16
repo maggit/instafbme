@@ -61,23 +61,18 @@ get "/oauth/callback" do
 end
 
 get "/feed" do
+  unless session[:access_token]   
+    redirect "/"
+  end
   logger.info "@access_token = #{@access_token}"
   client = Instagram.client(:access_token => session[:access_token])
-  user = client.user
-  session[:user] = user
-  session[:counts] = client.user.counts.media
-  logger.info "received user = #{user}"
+  @user = client.user
+  session[:user] = @user
+  session[:counts] = @user.counts.media
+  logger.info "received user = #{@user}"
   logger.info "user recent media #{client.user_recent_media.inspect}"
-  
-  html = "<h1>#{user.username}'s recent photos</h1>"
-
-
-
-    for media_item in client.user_recent_media(:count => 60)
-      html << "<a href='#{media_item.images.standard_resolution.url}'><img src='#{media_item.images.thumbnail.url}'></a>"
-    end
-
-  html
+  @recent_media = client.user_recent_media(:count => 60)
+  erb :feed
 end
 
 get "/logout" do
