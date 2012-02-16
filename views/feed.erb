@@ -1,6 +1,10 @@
 <div class="row">
-	<div class="span10">
+	<div class="span12">
 		<h2><%=@user.username%>'s recent photos</h2>
+		<div class="alert alert-message fade in">
+			<a href="#" data-dismiss="alert" class="close">×</a>
+		    	<strong>Holy guacamole!</strong>
+		</div>
 		<ul class="media-grid">
 			<% @recent_media.each do |media| %>
 			 	<li class="span3">
@@ -16,11 +20,6 @@
 				</li>
 				<li><a href="#">Next</a></li>
 			</ul>
-		</div>
-	</div>
-	<div class="span4">
-		<div id="connect_button">
-			<img class="thumbnail" src="/images/insta_logo.jpg">
 		</div>
 	</div>
 </div>

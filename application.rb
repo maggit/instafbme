@@ -41,6 +41,9 @@ get_or_post '/' do
   end
   
   @test = REDIS.get("main_title")
+  
+  @error = params[:error] if params[:error]
+  
   erb :index
 end
 
@@ -61,8 +64,8 @@ get "/oauth/callback" do
 end
 
 get "/feed" do
-  unless session[:access_token]   
-    redirect "/"
+  unless session[:access_token]  
+    redirect "/?error=true"
   end
   logger.info "@access_token = #{@access_token}"
   client = Instagram.client(:access_token => session[:access_token])
