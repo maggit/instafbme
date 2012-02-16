@@ -2,7 +2,8 @@
 	<div class="span10">
 		<h1><%=@user.username%>'s recent photos</h1>
 		<ul class="media-grid">
-			<% @recent_media.each |media | do %>
+			each { |e|  }
+			<% @recent_media.each do |media| %>
 			 	<li class="span3">
 					<a href="<%=media.images.standard_resolution.url%>"><img  class="thumbnail" src="<%=media.images.thumbnail.url%>"></a>
 				</li>
