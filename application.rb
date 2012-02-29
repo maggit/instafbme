@@ -64,11 +64,9 @@ get "/feed" do
   logger.info "received user = #{@user}"
   logger.info "user recent media #{client.user_recent_media.inspect}"
   
-
-  @next = params[:next]
-  @prev = params[:prev]
-  
-  @recent_media = client.user_recent_media(:count => 60)
+  @recent_media = client.user_recent_media(:count => 60, :max_id => params[:next], :min_id => params[:prev])
+  @next = @recent_media.last.id
+  @prev = @recent_media.first.id
   erb :feed
 end
 
