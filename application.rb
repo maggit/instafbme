@@ -65,8 +65,8 @@ get "/feed" do
   logger.info "user recent media #{client.user_recent_media.inspect}"
   
   @recent_media = client.user_recent_media(:count => 60, :max_id => params[:next], :min_id => params[:prev])
-  @next = @recent_media.last.id
-  @prev = @recent_media.first.id
+  @next = @recent_media.last.id if (@recent_media and @recent_media > 0)
+  @prev = @recent_media.first.id if (@recent_media and @recent_media > 0)
   erb :feed
 end
 

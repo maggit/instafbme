@@ -14,8 +14,8 @@
 		</ul>
 		<div class="pagination">
 			<ul>
-				<li><a href="/feed?prev=<%=@prev%>">Prev</a></li>
-				<li><a href="/feed?next=<%=@next%>">Next</a></li>
+				<li><a href="<% if @prev%>/feed?prev=<%=@prev%><% else %>#<%end%>">Prev</a></li>
+				<li><a href="<% if @next%>/feed?next=<%=@next%><% else %>#<%end%>">Next</a></li>
 			</ul>
 		</div>
 	</div>
