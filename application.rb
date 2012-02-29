@@ -63,6 +63,11 @@ get "/feed" do
   session[:counts] = @user.counts.media
   logger.info "received user = #{@user}"
   logger.info "user recent media #{client.user_recent_media.inspect}"
+  
+
+  @next = params[:next]
+  @prev = params[:prev]
+  
   @recent_media = client.user_recent_media(:count => 60)
   erb :feed
 end
